@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Task List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Due Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in table %}
+            <tr>
+                <td>{{ task[0] }}</td>
+                <td>{{ task[1] }}</td>
+                <td>{{ task[2] }}</td>
+                <td>{{ task[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <form action="/add_task" method="post">
+        <label for="taskID">Task ID:</label>
+        <input type="text" id="taskID" name="taskID">
+        <br>
+        <label for="taskDescription">Task Description:</label>
+        <input type="text" id="taskDescription" name="taskDescription">
+        <br>
+        <label for="dueDate">Due Date:</label>
+        <input type="text" id="dueDate" name="dueDate">
+        <br>
+        <button type="submit">Add</button>
+    </form>
+    <form action="/update_task" method="post">
+        <label for="taskID">Task ID:</label>
+        <input type="text" id="taskID" name="taskID">
+        <br>
+        <label for="taskDescription">Task Description:</label>
+        <input type="text" id="taskDescription" name="taskDescription">
+        <br>
+        <label for="dueDate">Due Date:</label>
+        <input type="text" id="dueDate" name="dueDate">
+        <br>
+        <label for="completionStatus">Completion Status:</label>
+        <input type="text" id="completionStatus" name="completionStatus">
+        <br>
+        <button type="submit">Update</button>
+    </form>
+    <form id="deleteForm" action="/delete_task" method="post">
+        <label for="taskID">Task ID:</label>
+        <input type="text" id="taskID" name="taskID">
+        <br>
+        <button type="submit">Delete</button>
+    </form>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

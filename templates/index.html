@@ -28,36 +28,42 @@
             {% endfor %}
         </tbody>
     </table>
+    <h3>Add new task</h3>
     <form id="addTaskForm" action="/add_task" method="post">
         <label for="taskID">Task ID:</label>
-        <input type="text" id="taskID" name="taskID">
+        <input type="text" id="addTaskID" name="taskID">
         <br>
         <label for="taskDescription">Task Description:</label>
-        <input type="text" id="taskDescription" name="taskDescription">
+        <input type="text" id="addTaskDescription" name="taskDescription">
         <br>
         <label for="dueDate">Due Date:</label>
-        <input type="text" id="dueDate" name="dueDate">
+        <input type="text" id="addDueDate" name="dueDate">
         <br>
         <button type="submit">Add</button>
     </form>
+    <h3>Update a task</h3>
     <form id="updateTaskForm" action="/update_task" method="post">
         <label for="taskID">Task ID:</label>
-        <input type="text" id="taskID" name="taskID">
+        <input type="text" id="updateTaskID" name="taskID">
         <br>
         <label for="taskDescription">Task Description:</label>
-        <input type="text" id="taskDescription" name="taskDescription">
+        <input type="text" id="updateTaskDescription" name="taskDescription">
         <br>
         <label for="dueDate">Due Date:</label>
-        <input type="text" id="dueDate" name="dueDate">
+        <input type="text" id="updateDueDate" name="dueDate">
         <br>
         <label for="completionStatus">Completion Status:</label>
-        <input type="text" id="completionStatus" name="completionStatus">
+        <select id="updateCompletionStatus" name="completionStatus">
+            <option value="Not Completed">Not Completed</option>
+            <option value="Completed">Completed</option>
+        </select>
         <br>
         <button type="submit">Update</button>
     </form>
+    <h3>Delete a task</h3>
     <form id="deleteTaskForm" action="/delete_task" method="post">
         <label for="taskID">Task ID:</label>
-        <input type="text" id="taskID" name="taskID">
+        <input type="text" id="deleteTaskID" name="taskID">
         <br>
         <button type="submit">Delete</button>
     </form>

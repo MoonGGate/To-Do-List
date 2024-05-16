@@ -23,27 +23,27 @@ function displayError(inputID, errorMessage) {
     inputElement.insertAdjacentElement('afterend', errorLabel);
 }
 
+// ID check for addTaskForm
 document.getElementById('addTaskForm').addEventListener('submit', function(event) {
     // Prevent the default form submission
     event.preventDefault();
 
     // Get form input values
-    var taskID = document.getElementById('taskID').value.trim();
+    var taskID = document.getElementById('addTaskID').value.trim();
 
     // Validate ID
     if (!taskID) {
-        displayError('taskID', 'Task ID is required');
+        displayError('addTaskID', 'Task ID is required');
         return;
     } else if (isNaN(taskID)) {
-        displayError('taskID', 'Task ID can only contain numbers from 0-9');
+        displayError('addTaskID', 'Task ID can only contain numbers from 0-9');
         return;
     } else {
         // Check if ID exists asynchronously
         checkIfIdExists(taskID)
             .then(idExists => {
                 if (idExists) {
-                    displayError('taskID', 'Task ID already exists');
-                    console.log('Task ID already exists');
+                    displayError('addTaskID', 'Task ID already exists');
                 } else {
                     // Proceed with form submission if ID does not exist
                     event.target.submit();
@@ -55,3 +55,66 @@ document.getElementById('addTaskForm').addEventListener('submit', function(event
     }
 });
 
+// ID check for updateTaskForm
+document.getElementById('updateTaskForm').addEventListener('submit', function(event) {
+    // Prevent the default form submission
+    event.preventDefault();
+
+    // Get form input values
+    var taskID = document.getElementById('updateTaskID').value.trim();
+
+    // Validate ID
+    if (!taskID) {
+        displayError('updateTaskID', 'Task ID is required');
+        return;
+    } else if (isNaN(taskID)) {
+        displayError('updateTaskID', 'Task ID can only contain numbers from 0-9');
+        return;
+    } else {
+        // Check if ID exists asynchronously
+        checkIfIdExists(taskID)
+            .then(idExists => {
+                if (!idExists) {
+                    displayError('updateTaskID', 'ID does not exist');
+                } else {
+                    // Proceed with form submission if ID does not exist
+                    event.target.submit();
+                }
+            })
+            .catch(error => {
+                console.error('Error checking ID:', error);
+            });
+    }
+});
+
+// ID check for deleteTaskForm
+document.getElementById('deleteTaskForm').addEventListener('submit', function(event) {
+    // Prevent the default form submission
+    event.preventDefault();
+
+    // Get form input values
+    var taskID = document.getElementById('deleteTaskID').value.trim();
+
+    // Validate ID
+    if (!taskID) {
+        displayError('deleteTaskID', 'Task ID is required');
+        return;
+    } else if (isNaN(taskID)) {
+        displayError('deleteTaskID', 'Task ID can only contain numbers from 0-9');
+        return;
+    } else {
+        // Check if ID exists asynchronously
+        checkIfIdExists(taskID)
+            .then(idExists => {
+                if (!idExists) {
+                    displayError('deleteTaskID', 'ID does not exist');
+                } else {
+                    // Proceed with form submission if ID does not exist
+                    event.target.submit();
+                }
+            })
+            .catch(error => {
+                console.error('Error checking ID:', error);
+            });
+    }
+});

@@ -18,15 +18,15 @@ class TasksDAO:
             return print(f"Error inserting task: {str(e)}")
 
     def retrieve_task(self, taskID):
-        if self.check_id_exists(taskID) != True:
-            return print(self.check_id_exists(taskID))
         query = f"SELECT * FROM tasks WHERE taskID = {taskID};"
-        self.cursor.execute(query)
-        return self.cursor.fetchone()
+        try:
+            self.cursor.execute(query)
+            return self.cursor.fetchone()
+        except Exception as e:
+            # Handle the exception (e.g., log the error, return an error message)
+            return print(f"Error retrieving task: {str(e)}")
 
     def update_task(self, taskID, taskDescription = None, dueDate = None, completionStatus = "Not completed"):
-        if self.check_id_exists(taskID) != True:
-            return print(self.check_id_exists(taskID))
         query = "UPDATE tasks SET "
         updates = []
 
@@ -41,22 +41,32 @@ class TasksDAO:
             query += ", ".join(updates) 
             query += f"WHERE taskID = {taskID};"
 
-        self.cursor.execute(query)
-        db.connection.commit()
-        return print("Updated a task successfully")
+        try:
+            self.cursor.execute(query)
+            db.connection.commit()
+            return print("Updated a task successfully")
+        except Exception as e:
+            # Handle the exception (e.g., log the error, return an error message)
+            return print(f"Error retrieving task: {str(e)}")
         
     def delete_task(self, taskID):
-        if self.check_id_exists(taskID) != 'true':
-            return print(self.check_id_exists(taskID))
         query = f"DELETE FROM tasks WHERE taskID = {taskID};"
-        self.cursor.execute(query)
-        db.connection.commit()
-        return print("The task has been deleted successfully")
+        try:
+            self.cursor.execute(query)
+            db.connection.commit()
+            return print("The task has been deleted successfully")
+        except Exception as e:
+            # Handle the exception (e.g., log the error, return an error message)
+            return print(f"Error retrieving task: {str(e)}")
 
     def retrieve_all(self):
         query = "SELECT * FROM tasks;"
-        self.cursor.execute(query)
-        return self.cursor.fetchall()
+        try:
+            self.cursor.execute(query)
+            return self.cursor.fetchall()
+        except Exception as e:
+            # Handle the exception (e.g., log the error, return an error message)
+            return print(f"Error retrieving task: {str(e)}")
     
     # Error Handling
     def check_id_exists(self, taskID):
@@ -65,7 +75,7 @@ class TasksDAO:
         ids = self.cursor.fetchall()
         for id in ids:
             if taskID == id[0]:
-                return 'true'
+                return 'true'   # Returns string because its later passed to script.js
         return 'false'
 
 

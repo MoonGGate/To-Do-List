@@ -28,7 +28,7 @@
             {% endfor %}
         </tbody>
     </table>
-    <form action="/add_task" method="post">
+    <form id="addTaskForm" action="/add_task" method="post">
         <label for="taskID">Task ID:</label>
         <input type="text" id="taskID" name="taskID">
         <br>
@@ -40,7 +40,7 @@
         <br>
         <button type="submit">Add</button>
     </form>
-    <form action="/update_task" method="post">
+    <form id="updateTaskForm" action="/update_task" method="post">
         <label for="taskID">Task ID:</label>
         <input type="text" id="taskID" name="taskID">
         <br>
@@ -55,7 +55,7 @@
         <br>
         <button type="submit">Update</button>
     </form>
-    <form id="deleteForm" action="/delete_task" method="post">
+    <form id="deleteTaskForm" action="/delete_task" method="post">
         <label for="taskID">Task ID:</label>
         <input type="text" id="taskID" name="taskID">
         <br>

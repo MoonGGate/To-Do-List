@@ -36,11 +36,16 @@ def update_task():
 # Define route for task deletion
 @app.route('/delete_task', methods=['POST'])
 def delete_task():
-    taskID = request.form['taskID']
+    taskID = int(request.form['taskID'])
 
     DAO.delete_task(taskID)
     
     return redirect('/')
+
+@app.route('/check_id/<int:taskID>')
+def check_id(taskID):
+    print(DAO.check_id_exists(taskID))
+    return DAO.check_id_exists(taskID)
 
 if __name__ == '__main__':
     DAO = TasksDAO()

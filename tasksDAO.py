@@ -7,7 +7,7 @@ class TasksDAO:
 
     def insert_task(self, taskID, taskDescription, dueDate):
         completionStatus = "Not Completed"
-        query = "INSERT INTO tasks VALUES (%s, %s, %s, %s)"
+        query = "INSERT INTO tasks VALUES (%s, %s, %s, %s);"
         values = (taskID, taskDescription, dueDate, completionStatus)
         try:
             self.cursor.execute(query, values)
@@ -18,11 +18,15 @@ class TasksDAO:
             return print(f"Error inserting task: {str(e)}")
 
     def retrieve_task(self, taskID):
+        if self.check_id_exists(taskID) != True:
+            return print(self.check_id_exists(taskID))
         query = f"SELECT * FROM tasks WHERE taskID = {taskID};"
         self.cursor.execute(query)
         return self.cursor.fetchone()
 
     def update_task(self, taskID, taskDescription = None, dueDate = None, completionStatus = "Not completed"):
+        if self.check_id_exists(taskID) != True:
+            return print(self.check_id_exists(taskID))
         query = "UPDATE tasks SET "
         updates = []
 
@@ -42,12 +46,28 @@ class TasksDAO:
         return print("Updated a task successfully")
         
     def delete_task(self, taskID):
+        if self.check_id_exists(taskID) != 'true':
+            return print(self.check_id_exists(taskID))
         query = f"DELETE FROM tasks WHERE taskID = {taskID};"
         self.cursor.execute(query)
         db.connection.commit()
         return print("The task has been deleted successfully")
 
     def retrieve_all(self):
-        query = "SELECT * FROM tasks"
+        query = "SELECT * FROM tasks;"
         self.cursor.execute(query)
         return self.cursor.fetchall()
+    
+    # Error Handling
+    def check_id_exists(self, taskID):
+        query = "SELECT taskID FROM tasks;"
+        self.cursor.execute(query)
+        ids = self.cursor.fetchall()
+        for id in ids:
+            if taskID == id[0]:
+                return 'true'
+        return 'false'
+
+
+test = TasksDAO()
+print(test.check_id_exists(1))

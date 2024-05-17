@@ -15,11 +15,11 @@ function checkIfIdExists(taskID) {
 }
 
 function displayError(inputID, errorMessage) {
-    var errorLabel = document.createElement('label');
+    let errorLabel = document.createElement('label');
     errorLabel.textContent = errorMessage;
     errorLabel.style.color = 'red';
 
-    var inputElement = document.getElementById(inputID);
+    let inputElement = document.getElementById(inputID);
     inputElement.insertAdjacentElement('afterend', errorLabel);
 }
 
@@ -29,7 +29,7 @@ document.getElementById('addTaskForm').addEventListener('submit', function(event
     event.preventDefault();
 
     // Get form input values
-    var taskID = document.getElementById('addTaskID').value.trim();
+    let taskID = document.getElementById('addTaskID').value.trim();
 
     // Validate ID
     if (!taskID) {
@@ -61,7 +61,7 @@ document.getElementById('updateTaskForm').addEventListener('submit', function(ev
     event.preventDefault();
 
     // Get form input values
-    var taskID = document.getElementById('updateTaskID').value.trim();
+    let taskID = document.getElementById('updateTaskID').value.trim();
 
     // Validate ID
     if (!taskID) {
@@ -93,7 +93,7 @@ document.getElementById('deleteTaskForm').addEventListener('submit', function(ev
     event.preventDefault();
 
     // Get form input values
-    var taskID = document.getElementById('deleteTaskID').value.trim();
+    let taskID = document.getElementById('deleteTaskID').value.trim();
 
     // Validate ID
     if (!taskID) {

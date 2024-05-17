@@ -6,7 +6,6 @@
     font-family: "Poetsen One", sans-serif;
     font-weight: 400;
     font-style: normal;
-    margin: 0;
 }
 
 img {
@@ -26,6 +25,9 @@ header {
     margin: 0 0 20px 0;
     height: 100%;
     max-width: 100%;
+    border: 2px solid #24252A;
+    border-radius: 10px;
+    box-shadow: 0 3px 2px #727581;
 }
 
 a {
